@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín, Simoncito bonito?</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #fce4ec; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .container { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #d81b60; }
+        .buttons { margin-top: 20px; position: relative; height: 100px; }
+        button { padding: 10px 25px; font-size: 18px; cursor: pointer; border-radius: 10px; border: none; transition: all 0.2s; }
+        #yesBtn { background-color: #4caf50; color: white; }
+        #noBtn { background-color: #f44336; color: white; position: absolute; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueG56ZzR6NHR6eG56ZzR6NHR6eG56ZzR6NHR6eG56ZzR6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v4aO6L1VXT1A2U1Y8P/giphy.gif" width="150">
+        <h1 id="question">¿Quieres ser mi San Valentín?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Sí</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        let fontSize = 18;
+
+        // El botón "No" se mueve al intentar tocarlo
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            
+            // Cada vez que intenta dar a NO, el SÍ crece
+            fontSize += 10;
+            yesBtn.style.fontSize = `${fontSize}px`;
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.querySelector('.container').innerHTML = "<h1>¡SIII! Sabía que dirías que sí ❤️</h1><img src='https://media.giphy.com/media/UMon0FO7RnLiU/giphy.gif'>";
+        });
+    </script>
+</body>
+</html>
