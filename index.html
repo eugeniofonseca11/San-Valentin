@@ -6,12 +6,24 @@
     <title>¿Quieres ser mi San Valentín, Simoncito bonito?</title>
     <style>
         body { font-family: 'Arial', sans-serif; background-color: #fce4ec; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .container { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #d81b60; }
-        .buttons { margin-top: 20px; position: relative; height: 100px; }
-        button { padding: 10px 25px; font-size: 18px; cursor: pointer; border-radius: 10px; border: none; transition: all 0.2s; }
-        #yesBtn { background-color: #4caf50; color: white; }
-        #noBtn { background-color: #f44336; color: white; position: absolute; }
+        .container { 
+    text-align: center; 
+    background: white; 
+    padding: 30px; 
+    border-radius: 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    position: relative; /* Esto mantiene al botón adentro */
+    width: 80%;
+    max-width: 400px;
+    min-height: 400px; /* Espacio suficiente para que el botón juegue */
+}
+
+#noBtn { 
+    background-color: #f44336; 
+    color: white; 
+    position: absolute; /* Ahora es absoluto respecto al contenedor */
+    transition: all 0.1s ease; /* Movimiento más suave */
+}
     </style>
 </head>
 <body>
@@ -30,20 +42,22 @@ const yesBtn = document.getElementById('yesBtn');
 let fontSize = 18;
 
 noBtn.addEventListener('mouseover', () => {
-    // Calculamos el espacio disponible restando el tamaño del botón
-    // Usamos Math.max para evitar números negativos en pantallas pequeñas
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    const container = noBtn.parentElement;
+    
+    // Calculamos el ancho y alto disponible DENTRO del cuadro blanco
+    const maxX = container.clientWidth - noBtn.offsetWidth;
+    const maxY = container.clientHeight - noBtn.offsetHeight;
 
-    // Forzamos al botón a quedarse en una posición fija relativa a la pantalla
-    noBtn.style.position = 'fixed'; 
+    // Generamos la posición dentro de esos límites
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
 
-    // El botón SÍ crece cada vez que intentan tocar el NO
-    fontSize += 5; 
+    // El botón SÍ sigue creciendo
+    fontSize += 5;
     yesBtn.style.fontSize = `${fontSize}px`;
-    yesBtn.style.padding = `${fontSize / 2}px ${fontSize}px`;
 });
 
         yesBtn.addEventListener('click', () => {
